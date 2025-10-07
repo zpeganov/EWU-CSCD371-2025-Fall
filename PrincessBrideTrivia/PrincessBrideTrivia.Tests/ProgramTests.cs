@@ -7,7 +7,7 @@ public class ProgramTests
 {
 
     [TestMethod]
-    public void DisplayHint_ReturnsStringAnswerIndex()
+    public void DisplayHint_ReturnsStringAnswerIndex_CorrectAnswer1()
     {
         //Arrange
         Question question = new();

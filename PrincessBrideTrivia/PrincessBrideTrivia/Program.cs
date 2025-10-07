@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace PrincessBrideTrivia;
+﻿namespace PrincessBrideTrivia;
 
 public class Program
 {
@@ -10,7 +8,6 @@ public class Program
         Question[] questions = LoadQuestions(filePath);
         Console.WriteLine("Type HINT for a hint");
         int numberCorrect = 0;
-        // Console.WriteLine(questions.Length);
         for (int i = 0; i < questions.Length; i++)
         {
             bool result = AskQuestion(questions[i]);
@@ -18,7 +15,6 @@ public class Program
             {
                 numberCorrect++;
             }
-            //    Console.WriteLine(numberCorrect);
 
         }
         Console.WriteLine("You got " + GetPercentCorrect(numberCorrect, questions.Length) + " correct");
@@ -26,16 +22,13 @@ public class Program
 
     public static string GetPercentCorrect(int numberCorrectAnswers, int numberOfQuestions)
     {
-        // Console.WriteLine("Number correct: " + numberCorrectAnswers);
-        // Console.WriteLine("Number of questions: " + numberOfQuestions);
-        // Console.WriteLine(((double)numberCorrectAnswers / (double)numberOfQuestions));
-        double result = (double)numberCorrectAnswers / (double)numberOfQuestions * 100;
+        double result = (double)numberCorrectAnswers / numberOfQuestions * 100;
         return (int)result + "%";
     }
 
     public static bool AskQuestion(Question question)
     {
-        
+
         DisplayQuestion(question);
         string userGuess = GetGuessFromUser();
         if (userGuess.ToUpper() == "HINT")
@@ -43,13 +36,14 @@ public class Program
             Console.WriteLine(DisplayHint(question));
             userGuess = GetGuessFromUser();
         }
-           
+
         return DisplayResult(userGuess, question);
     }
 
     public static string DisplayHint(Question question)
     {
-        return "The correct answer is: " + question.CorrectAnswerIndex;
+        int correctIndex = int.Parse(question.CorrectAnswerIndex) - 1;
+        return "The correct answer is: " + question.Answers[correctIndex];
     }
 
     public static string GetGuessFromUser()
@@ -76,8 +70,8 @@ public class Program
         {
             Console.WriteLine((i + 1) + ": " + question.Answers[i]);
         }
-         
-        
+
+
     }
 
     public static string GetFilePath()
@@ -107,9 +101,8 @@ public class Program
             question.Answers[0] = answer1;
             question.Answers[1] = answer2;
             question.Answers[2] = answer3;
-            questions[i] = question;
-
             question.CorrectAnswerIndex = correctAnswerIndex;
+            questions[i] = question;
         }
         return questions;
     }
