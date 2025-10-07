@@ -12,12 +12,13 @@ public class ProgramTests
         //Arrange
         Question question = new();
         question.CorrectAnswerIndex = "1";
+        question.Answers = new string[] { "Red", "Orange", "Yellow" };
 
         //Act
         string hintResult = Program.DisplayHint(question);
 
         //Assert
-        Assert.AreEqual("The correct answer is: 1", hintResult);
+        Assert.AreEqual("The correct answer is: Red", hintResult);
     }
 
     [TestMethod]
